@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — STACKLY ARCHITECH STUDIO</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+  --primary: #0f172a;
+  --accent: #00bcd4;
+  --light: #e0f7fa;
+  --bg1: #001219;
+  --bg2: #003347;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: radial-gradient(circle at center, var(--bg2) 0%, var(--bg1) 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+/* === Background animated grid lines === */
+.grid {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(90deg, rgba(0,188,212,0.15) 1px, transparent 1px),
+    linear-gradient(rgba(0,188,212,0.15) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: moveGrid 40s linear infinite;
+  z-index: 0;
+}
+@keyframes moveGrid {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-80px,-80px); }
+}
+
+/* === Neon geometric shapes === */
+.shape {
+  position: absolute;
+  border: 2px solid rgba(0,188,212,0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0,188,212,0.5);
+  animation: floatShape 10s infinite ease-in-out alternate;
+  z-index: 0;
+}
+@keyframes floatShape {
+  from { transform: translateY(0) scale(1); opacity: 0.8; }
+  to { transform: translateY(-30px) scale(1.05); opacity: 1; }
+}
+
+/* === Center 404 content === */
+.container {
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+h1 {
+  font-size: 10rem;
+  margin: 0;
+  letter-spacing: 8px;
+  background: linear-gradient(90deg, #00eaff, #00bcd4);
+  --webkit-background-clip: text;
+  --webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(0,188,212,0.6);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 10px;
+  color: var(--light);
+}
+
+p {
+  font-size: 1.1rem;
+  color: #aeeaf0;
+  margin: 15px 0 35px;
+}
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background: var(--accent);
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0,188,212,0.4);
+}
+a.btn:hover {
+  background: #0097a7;
+  box-shadow: 0 0 25px rgba(0,188,212,0.8);
+  transform: scale(1.05);
+}
+
+/* === Rotating architectural lines === */
+.line {
+  position: absolute;
+  width: 120%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,188,212,0.6), transparent);
+  animation: moveLine 10s linear infinite;
+  z-index: 0;
+}
+@keyframes moveLine {
+  from { transform: rotate(0deg) translateX(0); opacity: 0.5; }
+  to { transform: rotate(360deg) translateX(50px); opacity: 1; }
+}
+
+/* === Floating dots === */
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(0,188,212,0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,188,212,0.9);
+  animation: moveDot 8s ease-in-out infinite alternate;
+}
+@keyframes moveDot {
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-50px) scale(1.2); opacity: 1; }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  h1 { font-size: 6rem; }
+  h2 { font-size: 1.5rem; }
+  p { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background Grid -->
+<div class="grid"></div>
+
+<!-- Floating Shapes -->
+<div class="shape" style="width:150px; height:150px; top:10%; left:10%; animation-delay:2s;"></div>
+<div class="shape" style="width:250px; height:250px; bottom:15%; right:15%; animation-delay:4s;"></div>
+<div class="shape" style="width:100px; height:100px; top:30%; right:25%; animation-delay:1s;"></div>
+
+<!-- Moving Lines -->
+<div class="line" style="top:30%; left:-10%; animation-duration:18s;"></div>
+<div class="line" style="bottom:25%; left:-10%; animation-duration:25s;"></div>
+
+<!-- Floating Dots -->
+<div class="dot" style="top:20%; left:30%; animation-duration:6s;"></div>
+<div class="dot" style="top:50%; left:70%; animation-duration:9s;"></div>
+<div class="dot" style="bottom:15%; left:50%; animation-duration:8s;"></div>
+
+<!-- 404 Content -->
+<div class="container">
+  <h1>404</h1>
+  <h2>Oops! Page Not Found</h2>
+  <p>The architectural blueprint you’re looking for doesn’t exist.</p>
+  <a href="index.html" class="btn">Back to Home</a>
+</div>
+
+<!-- JS to Randomize Floating Dots Dynamically -->
+<script>
+for (let i = 0; i < 15; i++) {
+  let dot = document.createElement('div');
+  dot.classList.add('dot');
+  dot.style.left = Math.random() * 100 + '%';
+  dot.style.top = Math.random() * 100 + '%';
+  dot.style.animationDuration = 5 + Math.random() * 10 + 's';
+  dot.style.animationDelay = Math.random() * 5 + 's';
+  document.body.appendChild(dot);
+}
+</script>
+
+</body>
+</html>

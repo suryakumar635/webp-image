@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | STACKLY ARCHITECH STUDIO</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #0a0f24;
+      --secondary: #1b1f3a;
+      --accent: #8b5cf6;
+      --highlight: #06b6d4;
+      --white: #ffffff;
+      --gray: #cbd5e1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at 10% 20%, #0f172a 0%, #1e293b 100%);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .stx-header {
+      background: linear-gradient(135deg, rgba(11,17,37,0.9), rgba(15,23,42,0.9)),
+        url('https://images.unsplash.com/photo-1526401485004-2aa7e1d2b6f3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stx-header::before,
+    .stx-header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+      background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%);
+      animation: stx-float 12s infinite ease-in-out alternate;
+    }
+
+    .stx-header::before { width: 300px; height: 300px; top: 10%; left: -120px; }
+    .stx-header::after { width: 400px; height: 400px; bottom: -120px; right: -180px; animation-delay: 2s; }
+
+    @keyframes stx-float {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .stx-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 8vw;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stx-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .stx-brand img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px var(--primary));
+    }
+
+    .stx-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .stx-menu a {
+      text-decoration: none;
+      color: var(--gray);
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .stx-menu .stx-active,
+    .stx-menu a:hover {
+      color: var(--highlight);
+      text-shadow: 0 0 8px rgba(6,182,212,0.8);
+    }
+
+    .stx-burger {
+      display: none;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .stx-hero {
+      text-align: center;
+      padding: 100px 10vw 130px;
+      position: relative;
+      z-index: 1;
+      animation: stx-fadein 1.2s ease;
+    }
+
+    @keyframes stx-fadein {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stx-hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--highlight));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .stx-hero p {
+      margin-top: 10px;
+      font-size: 1.15rem;
+      color: #bde0ef;
+    }
+
+    /* PROJECT SECTION */
+    .stx-projects {
+      max-width: 1200px;
+      margin: -80px auto 90px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      padding: 60px 7vw;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      position: relative;
+      text-align: center;
+    }
+
+    .stx-projects h2 {
+      font-size: 2.4rem;
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .stx-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .stx-filters button {
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: var(--gray);
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+
+    .stx-filters button.stx-active,
+    .stx-filters button:hover {
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      color: var(--white);
+      box-shadow: 0 0 12px rgba(139,92,246,0.6);
+      transform: scale(1.05);
+    }
+
+    .stx-project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
+    }
+
+    .stx-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 3px 20px rgba(0,0,0,0.2);
+      transform: translateY(40px);
+      opacity: 0;
+      transition: 0.8s ease;
+    }
+
+    .stx-card.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .stx-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: 0.7s ease;
+    }
+
+    .stx-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .stx-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .stx-card:hover .stx-overlay {
+      opacity: 1;
+    }
+
+    .stx-overlay a {
+      background: var(--white);
+      padding: 10px 18px;
+      color: var(--accent);
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .stx-card-info {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .stx-card-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .stx-card-info p {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #05060c;
+      padding: 60px 7vw;
+      margin-top: 120px;
+      color: #b0c8e0;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: #cde4ff;
+      transition: 0.3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* 🔹 Social Media Icons */
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      transition: 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .social-links a:hover {
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      box-shadow: 0 0 10px rgba(139,92,246,0.7);
+      transform: scale(1.15);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .stx-menu {
+        display: none;
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(15px);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 70vw;
+        padding: 25px;
+        border-radius: 12px;
+      }
+
+      .stx-menu.show { display: flex; }
+
+      .stx-burger { display: block; }
+
+      .stx-hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="stx-header">
+  <nav class="stx-navbar">
+    <div class="stx-brand">
+      <img src="data:image/jpeg;base64,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" alt="">
+      STACKLY ARCHITECH STUDIO
+    </div>
+
+    <ul class="stx-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="stx-active">Projects</a></li>
+      <li><a href="why.html">Why Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+
+    <div class="stx-burger">&#9776;</div>
+  </nav>
+
+  <section class="stx-hero">
+    <h1>Our Signature Projects</h1>
+    <p>Showcasing Innovation, Elegance & Modern Craftsmanship</p>
+  </section>
+</header>
+
+<section class="stx-projects">
+  <h2>Explore Our Masterpieces</h2>
+
+  <div class="stx-filters">
+    <button class="stx-active" data-filter="all">All</button>
+    <button data-filter="residential">Residential</button>
+    <button data-filter="commercial">Commercial</button>
+    <button data-filter="interior">Interior</button>
+  </div>
+
+  <div class="stx-project-grid">
+    <!-- cards -->
+    <div class="stx-card" data-category="residential">
+      <img src="skyline.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>Skyline Villas</h3>
+        <p>Luxury homes with panoramic views and sustainable architecture.</p>
+      </div>
+    </div>
+
+    <div class="stx-card" data-category="commercial">
+      <img src="urban.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>Urban Square</h3>
+        <p>Innovative commercial complex merging modern workspaces with retail design.</p>
+      </div>
+    </div>
+
+    <div class="stx-card" data-category="interior">
+      <img src="minimalist.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>Minimalist Interiors</h3>
+        <p>Clean, elegant spaces designed for modern living and aesthetics.</p>
+      </div>
+    </div>
+
+    <div class="stx-card" data-category="residential">
+      <img src="green.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>Green Haven Residence</h3>
+        <p>Eco-conscious residential design integrating light and nature.</p>
+      </div>
+    </div>
+
+    <div class="stx-card" data-category="commercial">
+      <img src="techhub.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>TechHub Offices</h3>
+        <p>Cutting-edge workspace fostering innovation and collaboration.</p>
+      </div>
+    </div>
+
+    <div class="stx-card" data-category="interior">
+      <img src="luxury.png" alt="">
+      <div class="stx-overlay"><a href="404.html">View Project</a></div>
+      <div class="stx-card-info">
+        <h3>Luxury Apartment</h3>
+        <p>Premium interior blend of textures, tones, and spatial balance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ COMPLETE FOOTER WITH SOCIAL MEDIA -->
+<footer>
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h3>STACKLY ARCHITECH STUDIO</h3>
+      <p>Premium modern architecture, interior design, and construction solutions for next-gen living and working spaces.</p>
+
+      <!-- 🔹 Social Media Section -->
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Services</h3>
+      <a href="#">Architectural Design</a>
+      <a href="#">Interior Design</a>
+      <a href="#">Construction</a>
+      <a href="#">Blueprint Drafting</a>
+      <a href="#">3D Visualization</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+      <p><i class="fa-solid fa-envelope"></i> stacklystudio@gmail.com</p>
+      <p><i class="fa-solid fa-location-dot"></i> Chennai, India</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 STACKLY ARCHITECH STUDIO — All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  document.querySelector(".stx-burger").addEventListener("click", () => {
+    document.querySelector(".stx-menu").classList.toggle("show");
+  });
+
+  // Filtering
+  const filters = document.querySelectorAll(".stx-filters button");
+  const cards = document.querySelectorAll(".stx-card");
+
+  filters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filters.forEach((b) => b.classList.remove("stx-active"));
+      btn.classList.add("stx-active");
+
+      const filter = btn.getAttribute("data-filter");
+
+      cards.forEach((card) => {
+        if (filter === "all" || card.dataset.category === filter) {
+          card.style.display = "block";
+          setTimeout(() => card.classList.add("show"), 100);
+        } else {
+          card.classList.remove("show");
+          setTimeout(() => (card.style.display = "none"), 300);
+        }
+      });
+    });
+  });
+
+  // Card reveal animation on load
+  window.onload = () => {
+    document.querySelectorAll(".stx-card").forEach((c, i) => {
+      setTimeout(() => c.classList.add("show"), i * 150);
+    });
+  };
+</script>
+
+</body>
+</html>

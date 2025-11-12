@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Architect Studio — Home</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --dark-bg: #0b1120;
+      --deep-blue: #0f172a;
+      --accent: #4f46e5;
+      --highlight: #06b6d4;
+      --gold: #facc15;
+      --silver: #e5e7eb;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #0b1120 0%, #1e1b4b 100%);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px var(--highlight); }
+      50% { box-shadow: 0 0 35px var(--gold); }
+    }
+
+    /* === NAVIGATION === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8vw;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--white);
+    }
+
+    .logo img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--dark-bg);
+      animation: glow 3s infinite alternate;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--highlight);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      text-align: center;
+      padding: 130px 10vw 120px;
+      background: linear-gradient(135deg, rgba(10,15,31,0.85), rgba(26,31,53,0.9)),
+        url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: var(--white);
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, var(--gold), var(--highlight));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .hero p {
+      color: var(--silver);
+      font-size: 1.2rem;
+      margin: 20px auto 40px;
+      max-width: 650px;
+    }
+
+    .hero button {
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      border: none;
+      color: var(--white);
+      padding: 14px 42px;
+      border-radius: 35px;
+      font-weight: 600;
+      box-shadow: 0 0 25px rgba(6,182,212,0.6);
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .hero button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+    }
+
+    /* === FEATURE SECTION === */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+      max-width: 1100px;
+      margin: 120px auto;
+      padding: 0 6vw;
+    }
+
+    .feature-card {
+      background: var(--glass);
+      border-radius: 22px;
+      padding: 40px 25px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 40px rgba(250, 204, 21, 0.3);
+    }
+
+    .feature-card i {
+      font-size: 2.5rem;
+      color: var(--highlight);
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      color: var(--gold);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--silver);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* === STATS SECTION === */
+    .stats {
+      background: linear-gradient(135deg, var(--accent), var(--highlight));
+      padding: 80px 5vw;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .stat {
+      margin: 20px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .stat h2 {
+      font-size: 2.5rem;
+      color: var(--gold);
+    }
+
+    .stat p {
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    /* === CONTACT CTA === */
+    .contact {
+      text-align: center;
+      padding: 100px 6vw;
+      margin: 100px auto;
+      border-radius: 25px;
+      max-width: 1000px;
+      background: linear-gradient(135deg, var(--deep-blue), var(--accent));
+      box-shadow: 0 0 40px rgba(6,182,212,0.4);
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .contact h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+    }
+
+    .contact button {
+      margin-top: 25px;
+      padding: 12px 35px;
+      background: var(--highlight);
+      color: var(--dark-bg);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .contact button:hover {
+      transform: scale(1.08);
+      background: var(--gold);
+      color: var(--deep-blue);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--deep-blue);
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--silver);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+    }
+
+    .footer-social a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--glass);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: all 0.4s ease;
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-6px);
+      background: var(--highlight);
+      color: var(--white);
+      box-shadow: 0 0 20px rgba(6,182,212,0.8);
+    }
+
+    /* === SCROLL TO TOP BUTTON === */
+    #scrollTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--highlight);
+      color: var(--dark-bg);
+      border: none;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 1.2rem;
+      display: none;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 999;
+    }
+
+    #scrollTop:hover {
+      background: var(--gold);
+    }
+
+    /* === MOBILE MENU === */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70vw;
+        background: rgba(15,23,42,0.95);
+        backdrop-filter: blur(15px);
+        padding: 100px 40px;
+        transition: right 0.5s ease-in-out;
+      }
+
+      .nav-links.show { right: 0; }
+
+      .nav-links a {
+        font-size: 1.2rem;
+        padding: 15px 0;
+        display: block;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+      }
+
+      .hamburger { display: block; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">
+      <img src="data:image/jpeg;base64,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" alt="logo" />
+      Stackly Architect Studio
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="why.html">Why Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+    <div class="hamburger"><i class="fas fa-bars"></i></div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Designing Tomorrow’s Architecture, Today</h1>
+    <p>We merge creativity, technology, and sustainability to redefine how modern architecture inspires living.</p>
+    <button onclick="window.location.href='projects.html'">Explore Projects</button>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feature-card"><i class="fas fa-building"></i><h3>Modern Architecture</h3><p>Innovative designs blending structure, nature, and technology into timeless spaces.</p></div>
+    <div class="feature-card"><i class="fas fa-drafting-compass"></i><h3>Smart Planning</h3><p>AI-assisted planning to optimize efficiency, comfort, and aesthetic balance.</p></div>
+    <div class="feature-card"><i class="fas fa-leaf"></i><h3>Eco Solutions</h3><p>Building green, sustainable spaces that respect nature while embracing luxury.</p></div>
+    <div class="feature-card"><i class="fas fa-city"></i><h3>Urban Vision</h3><p>We transform urban skylines through purposeful design and smart materials.</p></div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat"><h2>250+</h2><p>Architectural Projects</p></div>
+    <div class="stat"><h2>15+</h2><p>Years of Experience</p></div>
+    <div class="stat"><h2>30+</h2><p>Awards Won</p></div>
+    <div class="stat"><h2>50+</h2><p>Expert Designers</p></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <h2>Ready to Build the Future?</h2>
+    <p>Let’s craft sustainable, smart, and luxury spaces together — with Stackly Architect Studio.</p>
+    <button onclick="window.location.href='contact.html'">Contact Us</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <h3>Connect with Stackly</h3>
+    <div class="footer-social">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>© 2025 Stackly Architect Studio | All Rights Reserved</p>
+  </footer>
+
+  <!-- SCROLL TOP BUTTON -->
+  <button id="scrollTop"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- SCRIPT -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const scrollTop = document.getElementById('scrollTop');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      hamburger.innerHTML = navLinks.classList.contains('show')
+        ? '<i class="fas fa-times"></i>'
+        : '<i class="fas fa-bars"></i>';
+    });
+
+    window.addEventListener('scroll', () => {
+      scrollTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    scrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

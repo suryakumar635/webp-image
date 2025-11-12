@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STACKLY ARCHITECH STUDIO — Luxury Design & Innovation</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --dark-bg: #0a0f1f;
+      --deep-blue: #1a1f35;
+      --accent: #5b21b6;
+      --highlight: #06b6d4;
+      --gold: #facc15;
+      --silver: #e5e7eb;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, rgba(10,15,31,0.9), rgba(26,31,53,0.95)),
+        url('https://images.pexels.com/photos/7579135/pexels-photo-7579135.jpeg') center/cover no-repeat;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: conic-gradient(from 0deg, var(--highlight), var(--accent), var(--gold), var(--highlight));
+      opacity: 0.08;
+      animation: rotateGlow 10s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8vw;
+      position: sticky;
+      z-index: 5;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--white);
+      text-shadow: 0 0 10px rgba(14, 13, 9, 0.5);
+    }
+
+    .logo img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--dark-bg);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--highlight);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--highlight); }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* ===== HERO ===== */
+    .banner1 {
+      text-align: center;
+      padding: 140px 10vw 100px;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+      animation: fadeIn 2s ease;
+    }
+
+    .banner1 h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--highlight));
+      --webkit-background-clip: text;
+      
+      animation: slideUp 1.2s ease-out;
+    }
+
+    .banner1 p {
+      color: var(--silver);
+      font-size: 1.2rem;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .banner1 button {
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      border: none;
+      padding: 14px 40px;
+      color: var(--white);
+      font-weight: 600;
+      border-radius: 35px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(6,182,212,0.6);
+    }
+
+    .banner1 button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(139,92,246,0.8);
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+    }
+
+    /* ===== SLIDER ===== */
+    .slider {
+      position: relative;
+      width: 90%;
+      max-width: 1100px;
+      height: 400px;
+      margin: 100px auto;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active { opacity: 1; }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      transition: transform 6s ease-in-out;
+    }
+
+    .slide.active img { transform: scale(1); }
+
+    /* ===== ABOUT ===== */
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: 1100px;
+      margin: 100px auto;
+      gap: 40px;
+      padding: 0 6vw;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .about img {
+      flex: 1;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      width: 100%;
+    }
+
+    .about-content {
+      flex: 1;
+      min-width: 300px;
+      animation: slideUp 1.2s ease-in-out;
+    }
+
+    .about-content h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .about-content p {
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: linear-gradient(135deg, var(--accent), var(--highlight));
+      text-align: center;
+      padding: 80px 6vw;
+      border-radius: 25px;
+      margin: 100px auto;
+      max-width: 1000px;
+      box-shadow: 0 0 50px rgba(6,182,212,0.5);
+      animation: glowContact 4s infinite alternate;
+    }
+
+    @keyframes glowContact {
+      from { box-shadow: 0 0 25px rgba(6,182,212,0.3); }
+      to { box-shadow: 0 0 50px rgba(250,204,21,0.7); }
+    }
+
+    .contact h2 { font-size: 2rem; margin-bottom: 10px; }
+    .contact button {
+      margin-top: 20px;
+      padding: 12px 35px;
+      background: var(--white);
+      color: var(--accent);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      transform: scale(1.08);
+      background: var(--gold);
+      color: var(--dark-bg);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #05060c;
+      padding: 40px 7vw;
+      margin-top: 90px;
+      color: #b0c8e0;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: #cde4ff;
+      transition: 0.3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .banner1 h1 { font-size: 2.5rem; }
+      .banner1 p { font-size: 1.1rem; }
+      .slider { height: 350px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 6vw; }
+      .nav-links {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70vw;
+        background: rgba(15,23,42,0.95);
+        backdrop-filter: blur(15px);
+        padding: 100px 40px;
+        transition: right 0.5s ease-in-out;
+        z-index: 999;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+      }
+
+      .nav-links.show { right: 0; }
+
+      .nav-links a {
+        color: var(--white);
+        font-size: 1.2rem;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+      }
+
+      .hamburger { display: block; }
+
+      .about { flex-direction: column; text-align: center; }
+      .about-content h2 { font-size: 1.8rem; }
+      .about-content p { font-size: 1rem; }
+
+      .banner1 h1 { font-size: 2rem; }
+      .banner1 p { font-size: 1rem; }
+
+      .slider { height: 250px; margin: 60px auto; }
+
+      footer { padding: 40px 15px; }
+      .footer-social { gap: 15px; }
+    }
+/* ===== SOCIAL MEDIA FOOTER STYLING ===== */
+  .footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .footer-social .social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .footer-social .social-icons a:hover {
+    transform: scale(1.15);
+    background: linear-gradient(135deg, var(--highlight), var(--accent));
+    color: var(--white);
+    box-shadow: 0 0 20px rgba(91, 33, 182, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    .footer-social .social-icons {
+      justify-content: center;
+    }
+  }
+    @media (max-width: 480px) {
+      .logo { font-size: 1.2rem; }
+      .logo img { width: 45px; height: 45px; }
+
+      .banner1 h1 { font-size: 1.8rem; }
+      .banner1 p { font-size: 0.9rem; }
+
+      .banner1 button { padding: 12px 28px; font-size: 0.9rem; }
+
+      .contact h2 { font-size: 1.5rem; }
+      .contact p { font-size: 0.9rem; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Dropdown container */
+/* ===============================
+   🔹 BASE DROPDOWN STYLE
+================================*/
+.nav-links li {
+  position: relative;
+}
+
+.nav-links .dropdown {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #021231;
+  border: 1px solid #0a0707;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-width: 150px;
+  z-index: 100;
+  padding: 0;
+  margin: 6px 0 0 0;
+  display: none;
+  flex-direction: column;
+}
+
+.nav-links li:hover > .dropdown {
+  display: flex; /* 🔹 Show dropdown on hover (desktop) */
+}
+
+.nav-links .dropdown li {
+  padding: 8px 12px;
+}
+
+.nav-links .dropdown li a {
+  display: block;
+  color: rgb(229, 224, 233);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links .dropdown li a:hover {
+  background: #032d49;
+  color: #35c5cf;
+}
+
+/* ===============================
+   🔹 SPECIAL BUTTON STYLE (Home 2)
+================================*/
+.nav-links .dropdown li a[href="home2.html"] {
+  background: linear-gradient(135deg, #06b6d4, #5b21b6);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: 6px;
+  box-shadow: 0 0 10px rgba(6,182,212,0.5);
+  transition: all 0.3s ease;
+}
+
+.nav-links .dropdown li a[href="home2.html"]:hover {
+  background: linear-gradient(135deg, #facc15, #5b21b6);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+}
+
+/* ===============================
+   🔹 RESPONSIVE STYLES
+================================*/
+
+/* 📱 Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70vw;
+    background: rgba(15, 23, 42, 0.97);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+    gap: 1rem;
+    transition: right 0.5s ease;
+    box-shadow: -4px 0 25px rgba(0,0,0,0.4);
+  }
+
+  .nav-links.show {
+    right: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 12px 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* 🔹 Mobile Dropdown - Stacked inside menu */
+  .nav-links .dropdown {
+    position: static;
+    display: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+  }
+
+  .nav-links li.active > .dropdown {
+    display: flex;
+  }
+
+  .nav-links .dropdown li a {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    margin: 6px 0;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .nav-links .dropdown li a[href="home2.html"] {
+    width: 90%;
+    margin: 8px auto;
+    text-align: center;
+  }
+}
+
+/* 💻 Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .nav-links a {
+    font-size: 1rem;
+  }
+  .nav-links .dropdown {
+    min-width: 140px;
+  }
+}
+
+/* 🖥️ Desktop (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="data:image/jpeg;base64,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" alt="logo" />
+        STACKLY ARCHITECH STUDIO
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <!-- <li><a href="home2.html">View Home Page 2</a></li> -->
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="why.html">Why Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section class="banner1">
+      <h1>Designing Dreams into Reality</h1>
+      <p>Architectural Brilliance — Crafted with Passion, Precision & Innovation</p>
+      <button onclick="window.location.href='projects.html'">Explore Projects</button>
+    </section>
+  </header>
+
+  <section class="slider">
+    <div class="slide active"><img src="https://images.pexels.com/photos/5563472/pexels-photo-5563472.jpeg" alt="slide1"></div>
+    <div class="slide"><img src="https://images.pexels.com/photos/15036815/pexels-photo-15036815.jpeg" alt="slide2"></div>
+    <div class="slide"><img src="https://images.pexels.com/photos/7457914/pexels-photo-7457914.jpeg" alt="slide3"></div>
+  </section>
+
+  <section class="about">
+    <img src="https://images.pexels.com/photos/34682314/pexels-photo-34682314.jpeg" alt="about">
+    <div class="about-content">
+      <h2>Building Landmarks of the Future</h2>
+      <p>At STACKLY, we combine innovation with aesthetics, crafting designs that stand the test of time. Our approach blends sustainability, creativity, and engineering precision — shaping tomorrow’s skylines with today’s imagination.</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Let’s Build Something Extraordinary</h2>
+    <p>Partner with STACKLY’s elite architects to create spaces that inspire and endure.</p>
+    <button onclick="window.location.href='contact.html'">Contact Us</button>
+  </section>
+
+<footer>
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h3>STACKLY ARCHITECH STUDIO</h3>
+      <p>Premium modern architecture, interior design, and construction solutions for next-gen living and working spaces.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Services</h3>
+      <a href="#">Architectural Design</a>
+      <a href="#">Interior Design</a>
+      <a href="#">Construction</a>
+      <a href="#">Blueprint Drafting</a>
+      <a href="#">3D Visualization</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+      <p><i class="fa-solid fa-envelope"></i> stacklystudio@gmail.com</p>
+      <p><i class="fa-solid fa-location-dot"></i> Chennai, India</p>
+    </div>
+
+    <!-- 🌐 SOCIAL MEDIA SECTION -->
+    <div class="footer-col footer-social">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 STACKLY ARCHITECH STUDIO — All Rights Reserved.
+  </div>
+</footer>
+
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+      hamburger.innerHTML = navLinks.classList.contains("show")
+        ? '<i class="fas fa-times"></i>'
+        : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close menu on link click
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Image slider
+    const slides = document.querySelectorAll(".slide");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+   // 🟡 Home Button Click → Show Dropdown with Home2
+const homeLink = document.querySelector('.nav-links a[href="index.html"]');
+
+// Create dropdown container
+const dropdown = document.createElement('ul');
+dropdown.classList.add('dropdown');
+dropdown.style.display = 'none';
+
+// Create Home2 link
+const home2Item = document.createElement('li');
+home2Item.innerHTML = '<a href="home2.html">Home 2</a>';
+dropdown.appendChild(home2Item);
+
+// Append dropdown after Home link's parent <li>
+const homeLi = homeLink.parentElement;
+homeLi.style.position = 'relative';
+homeLi.appendChild(dropdown);
+
+// On click → toggle dropdown visibility
+homeLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+// Toggle dropdown on mobile
+document.querySelectorAll('.nav-links li > a').forEach(link => {
+  link.addEventListener('click', e => {
+    const parent = link.parentElement;
+    if (parent.querySelector('.dropdown')) {
+      e.preventDefault(); // prevent navigation
+      parent.classList.toggle('active');
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STACKLY ARCHITECH STUDIO | Login & Signup</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #00bcd4;
+  --secondary: #6a11cb;
+  --gold: #facc15;
+  --white: #ffffff;
+  --dark: #0f0f1a;
+  --gray: #dcdcdc;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top left, #111827, #000000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== BACKGROUND ANIMATION ===== */
+.bg-anim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-anim span {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  opacity: 0.2;
+  animation: float 12s infinite ease-in-out alternate;
+}
+.bg-anim span:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+.bg-anim span:nth-child(2) { bottom: 15%; right: 10%; animation-delay: 2s; }
+.bg-anim span:nth-child(3) { top: 30%; right: 30%; animation-delay: 4s; }
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-30px) scale(1.15); }
+}
+
+/* ===== AUTH CONTAINER ===== */
+.auth-container {
+  width: 850px;
+  height: 550px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 25px;
+  box-shadow: 0 0 40px rgba(0, 188, 212, 0.4);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  transition: all 0.6s ease;
+}
+
+/* ===== BRAND PANEL ===== */
+.brand-panel {
+  flex: 1;
+  background: linear-gradient(160deg, rgba(0,188,212,0.15), rgba(250,204,21,0.15));
+  backdrop-filter: blur(15px);
+  color: var(--gold);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.brand-panel h1 {
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+
+.brand-panel p {
+  color: var(--gray);
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.brand-panel img {
+  width: 160px;
+  margin-top: 30px;
+  filter: drop-shadow(0 0 10px var(--gold));
+  transition: 0.6s;
+}
+
+.brand-panel img:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* ===== AUTH FORM ===== */
+.auth-form {
+  flex: 1;
+  backdrop-filter: blur(25px);
+  background: rgba(255,255,255,0.03);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transition: 0.6s ease;
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+/* ===== INPUT FIELDS ===== */
+.field {
+  position: relative;
+  margin: 12px 0;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 45px 13px 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.field input:focus {
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+.field i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+}
+
+/* ===== BUTTONS ===== */
+.btn-main {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-main:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--primary);
+}
+
+/* ===== BACK BUTTON ===== */
+.btn-home {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-home:hover {
+  background: var(--gold);
+  color: var(--dark);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+/* ===== FORGOT PASSWORD ===== */
+.forgot-password {
+  text-align: right;
+  margin-top: 5px;
+}
+
+.forgot-password a {
+  color: var(--primary);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.forgot-password a:hover {
+  color: var(--gold);
+  text-shadow: 0 0 10px var(--gold);
+}
+
+/* ===== SWITCH LINK ===== */
+.switch-note {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-top: 18px;
+}
+
+.switch-note span {
+  color: var(--gold);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.switch-note span:hover {
+  text-shadow: 0 0 10px var(--gold);
+}
+
+/* ===== SLIDE EFFECT ===== */
+#form-signup {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s ease;
+}
+
+.auth-container.signup-mode #form-signup {
+  left: 0;
+}
+.auth-container.signup-mode #form-login {
+  left: -100%;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .auth-container {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+  }
+  .brand-panel {
+    order: 2;
+    padding: 30px 20px;
+  }
+  .auth-form {
+    order: 1;
+    padding: 40px 25px;
+  }
+  .brand-panel img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+  .auth-form {
+    padding: 30px 20px;
+  }
+  .brand-panel h1 {
+    font-size: 1.5rem;
+  }
+  .auth-form h2 {
+    font-size: 1.4rem;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Animated Background -->
+<div class="bg-anim">
+  <span></span><span></span><span></span>
+</div>
+
+<!-- Auth Container -->
+<div class="auth-container" id="authContainer">
+
+  <!-- Left Brand Panel -->
+  <div class="brand-panel">
+    <h1>STACKLY ARCHITECH STUDIO</h1>
+    <p>Designing your vision into architectural brilliance.<br>Join our network of innovators.</p>
+    <img src="data:image/jpeg;base64,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" alt="Logo">
+  </div>
+
+  <!-- Login Form -->
+  <div class="auth-form" id="form-login">
+    <button class="btn-home" onclick="goHome()">⬅ Back</button>
+    <h2>Welcome Back 👋</h2>
+    <div class="field">
+      <input type="email" placeholder="Email" required>
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div class="field">
+      <input type="password" placeholder="Password" required>
+      <i class="fa fa-lock"></i>
+    </div>
+    <div class="forgot-password">
+      <a href="#" id="forgotPassword">Forgot Password?</a>
+    </div>
+    <button class="btn-main">Login</button>
+    <p class="switch-note">Don’t have an account? <span id="switchSignup">Sign up</span></p>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="auth-form" id="form-signup">
+    <button class="btn-home" onclick="goHome()">⬅ Back</button>
+    <h2>Create Account ✨</h2>
+    <div class="field">
+      <input type="text" placeholder="Full Name" required>
+      <i class="fa fa-user"></i>
+    </div>
+    <div class="field">
+      <input type="email" placeholder="Email" required>
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div class="field">
+      <input type="password" placeholder="Password" required>
+      <i class="fa fa-lock"></i>
+    </div>
+    <button class="btn-main">Sign Up</button>
+    <p class="switch-note">Already have an account? <span id="switchLogin">Login</span></p>
+  </div>
+</div>
+
+<script>
+const container = document.getElementById("authContainer");
+
+document.getElementById("switchSignup").addEventListener("click", () => {
+  container.classList.add("signup-mode");
+});
+document.getElementById("switchLogin").addEventListener("click", () => {
+  container.classList.remove("signup-mode");
+});
+
+function goHome() {
+  window.location.href = "index.html";
+}
+
+// Forgot password
+document.getElementById("forgotPassword").addEventListener("click", (e) => {
+  e.preventDefault();
+  const email = prompt("🔑 Enter your registered email to reset your password:");
+  if (email) {
+    showMessage(`📧 Password reset link sent to ${email} (demo).`);
+  }
+});
+
+// Simple message popup
+function showMessage(msg) {
+  let alertBox = document.createElement("div");
+  alertBox.textContent = msg;
+  alertBox.style.position = "fixed";
+  alertBox.style.bottom = "30px";
+  alertBox.style.left = "50%";
+  alertBox.style.transform = "translateX(-50%)";
+  alertBox.style.background = "rgba(0,0,0,0.85)";
+  alertBox.style.color = "white";
+  alertBox.style.padding = "12px 20px";
+  alertBox.style.borderRadius = "10px";
+  alertBox.style.fontSize = "1rem";
+  alertBox.style.zIndex = "9999";
+  alertBox.style.boxShadow = "0 0 15px #00bcd4";
+  document.body.appendChild(alertBox);
+  setTimeout(() => alertBox.remove(), 2500);
+}
+</script>
+</body>
+</html>
